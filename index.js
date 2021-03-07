@@ -14,10 +14,3 @@ app.use(codeRouter);
 app.listen(port, () => {
   console.log('Express running on port ' + port);
 });
-
-// const test = () => {
-//   const code = new Code();
-//   console.log(code);
-// };
-
-// test();

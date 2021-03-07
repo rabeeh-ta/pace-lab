@@ -1,7 +1,7 @@
 const express = require('express');
 const Code = require('../models/codeModel');
 
-const router = express.Router();
+const router = new express.Router();
 
 //? create a new code file
 router.post('/code', async (req, res) => {
@@ -81,3 +81,5 @@ router.put('/codes/:id', async (req, res) => {
     res.status(500).send(e);
   }
 });
+
+module.exports = router;
