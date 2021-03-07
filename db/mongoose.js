@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 mongoose
   .connect(
-    'mongodb+srv://rabeeh:rabeeh@codeshare@codeshare.8orqr.mongodb.net/codeshare?retryWrites=true&w=majority',
+    'mongodb+srv://rabeeh:rabeeh9895@prod-cluster.ctha1.mongodb.net/codeShare?retryWrites=true&w=majority',
     { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
   )
   .then(() => {
-    console.log('Mongodb Connection');
+    console.log('Mongodb Connected');
   })
   .catch((e) => {
     console.log(e);

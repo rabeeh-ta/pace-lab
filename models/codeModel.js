@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const codeSchema = new mongoose.Schema('Code', {
+const codeSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -8,6 +8,7 @@ const codeSchema = new mongoose.Schema('Code', {
   description: {
     type: String,
     trim: true,
+    required: true,
   },
   code: {
     type: String,
