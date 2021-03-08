@@ -10,7 +10,7 @@ function loaded() {
     },
     created() {
       axios
-        .get('http://localhost:3000/codes')
+        .get('https://code-share-rbh.herokuapp.com/codes')
         .then((response) => {
           const users = response.data.data;
           console.log(`GET list users`, users);
