@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "dev": "nodemon index.js -e js,html"
   },
+  "proxy": "http://localhost:3000",
   "keywords": [],
   "author": "Rabeeh T A",
   "license": "ISC",
