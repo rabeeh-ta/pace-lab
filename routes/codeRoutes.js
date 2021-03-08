@@ -16,6 +16,7 @@ router.post('/code', async (req, res) => {
 
 //? Read all code files
 router.get('/codes', async (req, res) => {
+  console.log(req.url);
   try {
     const codes = await Code.find().sort({ posted: 'desc' });
     res.status(200).send(codes);
