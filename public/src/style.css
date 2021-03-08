@@ -18,13 +18,13 @@ nav a {
   color: #cd4773;
   font-size: bold;
 }
-nav a:hover {
-  color: #f0c8d5;
-}
 
 nav li > a {
   color: white;
   font-size: 1.2rem;
+}
+nav li > a:hover {
+  color: #f0c8d5;
 }
 
 section {

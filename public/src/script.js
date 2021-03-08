@@ -7,13 +7,14 @@ function loaded() {
     el: '#homePage',
     data: {
       message: 'Hello Vue!',
+      user: [],
     },
     created() {
       axios
         .get('https://code-share-rbh.herokuapp.com/codes')
         .then((response) => {
-          const users = response.data.data;
-          console.log(`GET list users`, users);
+          this.users = response.data.data;
+          console.log(`GET list users`, this.users);
         })
         .catch((error) => console.error(error));
     },
