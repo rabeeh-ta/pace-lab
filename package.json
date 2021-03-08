@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js -e js,html"
+    "dev": "nodemon index.js -e js,html,css"
   },
-  "proxy": "http://localhost:3000",
   "keywords": [],
   "author": "Rabeeh T A",
   "license": "ISC",

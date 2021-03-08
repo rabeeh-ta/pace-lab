@@ -18,6 +18,11 @@ nav a {
   color: #cd4773;
   font-size: bold;
 }
+nav a:hover {
+  text-decoration: none;
+  color: #cd4773;
+  font-size: bold;
+}
 
 nav li > a {
   color: white;

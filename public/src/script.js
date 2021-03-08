@@ -7,16 +7,19 @@ function loaded() {
     el: '#homePage',
     data: {
       message: 'Hello Vue!',
-      user: [],
+      codes: [],
     },
     created() {
-      axios
-        .get('https://code-share-rbh.herokuapp.com/codes')
-        .then((response) => {
-          this.users = response.data.data;
-          console.log(`GET list users`, this.users);
+      fetch('https://code-share-rbh.herokuapp.com/codes', {
+        method: 'GET',
+        headers: { 'Content-type': 'application/json;charset=UTF-8' },
+      })
+        .then((response) => response.json())
+        .then((json) => {
+          console.log(json);
+          this.codes = json;
         })
-        .catch((error) => console.error(error));
+        .catch((err) => console.log(err));
     },
   });
 }
