@@ -15,10 +15,15 @@
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+    <!-- highlight-js for code highlighting -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
 
     <!-- my styles -->
     <link rel="stylesheet" href="./src/style.css">
@@ -39,6 +44,33 @@
         </nav>
 
 
+
+        <!-- Button trigger modal -->
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"></button>
+
+        <!-- Modal -->
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-lg ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">{{code.title}}</div>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{code.description}}</p>
+                        <p>{{code.code}}</p>
+
+                    </div>
+                    <div class="modal-footer"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
         <section id="homePage">
 
             <div v-for="code in codes" :key="code._id" class="card" style="width: 20rem;">
@@ -48,7 +80,30 @@
                     <p class="card-text">{{code.description}}</p>
                     <div class="cardFooter">
                         <span class="text-muted text-italic"><em>Posted:{{code.posted}}</em></span>
-                        <a href="#" class="card-link">Code</a>
+                        <!-- Button trigger modal -->
+                        <a href="#" class="card-link" :data-bs-toggle="`${code._id}`"
+                            :data-bs-target="`#${code._id}`">Code</a>
+
+
+                        <!-- Modal -->
+                        <div class="modal" :id="code._id">
+                            <div class="modal-dialog modal-lg ">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="modal-title">{{code.title}}</div>
+
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>{{code.description}}</p>
+                                        <p>{{code.code}}</p>
+
+                                    </div>
+                                    <div class="modal-footer"></div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -70,6 +125,7 @@
 
 
     </div>
+
     <script src="./src/script.js"></script>
 </body>
 
