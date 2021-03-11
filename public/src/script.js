@@ -1,9 +1,9 @@
-window.addEventListener('load', function () {
-  loaded();
+window.addEventListener('load', async function () {
+  await loaded();
 });
 
-function loaded() {
-  var homePage = new Vue({
+async function loaded() {
+  var homePage = await new Vue({
     el: '#homePage',
     data: {
       message: 'Hello Vue!',
