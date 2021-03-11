@@ -21,10 +21,9 @@
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <!-- highlight-js for code highlighting -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.6.0/highlight.min.js"></script>
-
+    <!-- prism-js for code highlighting -->
+    <link rel="stylesheet" href="./src/prism.css">
+    <script src="./src/prism.js"></script>
     <!-- my styles -->
     <link rel="stylesheet" href="./src/style.css">
 </head>
@@ -76,6 +75,9 @@
                                     <div class="modal-body">
                                         <p>{{code.description}}</p>
                                         <p>{{code.code}}</p>
+                                        <pre><code class="language-c" v-html="code.code">
+
+                                        </code></pre>
 
                                     </div>
                                     <div class="modal-footer"></div>
