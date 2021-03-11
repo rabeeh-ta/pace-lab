@@ -9,7 +9,7 @@
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Stick&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Stick&display=swap" rel="stylesheet">
     <!-- Vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <!-- bootstrap -->
@@ -55,9 +55,9 @@
                     <h6 class="card-subtitle mb-1 mx-3 text-muted">- {{code.author}}</h6>
                     <p class="card-text">{{code.description}}</p>
                     <div class="cardFooter">
-                        <span class="text-muted text-italic"><em>Posted:{{code.posted}}</em></span>
+                        <span class="text-muted text-italic small"><em>Posted:{{code.posted}}</em></span>
                         <!-- Button trigger modal -->
-                        <button type="button" href="#" class="card-link" data-bs-toggle="modal"
+                        <button type="button" href="#" class="card-link btn " data-bs-toggle="modal"
                             :data-bs-target="`#mid${code._id}`">Code</button>
 
 

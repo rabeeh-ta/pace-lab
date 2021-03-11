@@ -2,6 +2,7 @@ body {
   background-color: #333a45;
   margin: 0;
   padding: 0;
+  font-family: 'Roboto Mono', monospace;
 }
 
 .stickFont {
@@ -59,13 +60,10 @@ section {
   flex-direction: row;
   justify-content: space-between;
 }
-.cardFooter a {
+.cardFooter > button {
   color: #00917c;
   text-transform: uppercase;
   font-weight: bold;
-}
-.cardFooter a:hover {
-  color: #025955;
 }
 
 .form-div {
