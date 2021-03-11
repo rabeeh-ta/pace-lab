@@ -67,3 +67,9 @@ section {
 .cardFooter a:hover {
   color: #025955;
 }
+
+.form-div {
+  margin: 0 auto;
+  width: 500px;
+  color: white;
+}
