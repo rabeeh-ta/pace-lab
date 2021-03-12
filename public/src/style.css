@@ -25,6 +25,9 @@ nav a:hover {
   font-size: bold;
 }
 
+nav ul {
+  padding-top: 20px;
+}
 nav li > a {
   color: white;
   font-size: 1.2rem;
@@ -76,5 +79,8 @@ section {
   nav {
     display: flex;
     flex-direction: column;
+  }
+  nav ul {
+    padding-top: 4px;
   }
 }
