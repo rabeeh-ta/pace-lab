@@ -71,3 +71,10 @@ section {
   width: 500px;
   color: white;
 }
+
+@media (max-width: 480px) {
+  nav {
+    display: flex;
+    flex-direction: column;
+  }
+}
