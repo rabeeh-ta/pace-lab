@@ -43,27 +43,30 @@
         <section id="postPage">
 
             <div class="form-div">
-                <form>
+                <form @submit.prevent="postButton">
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1 " class="form-label">Name of Author</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Anonymous">
+                        <label for="authorInput " class="form-label">Name of Author</label>
+                        <input type="text" class="form-control" id="authorInput" v-model="author"
+                            placeholder="anonymous">
 
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Title</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1"
-                            placeholder="Title of the Post">
+                        <label for="titleInput" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="titleInput" v-model="title"
+                            placeholder="title of the program">
 
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                        <label for="descriptionInput" class="form-label">Description</label>
+                        <textarea class="form-control" id="descriptionInput" placeholder="explain the program briefly"
+                            v-model="description" rows="2"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Paste the Code here</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+                        <label for="codeInput" class="form-label">Paste the Code here</label>
+                        <textarea class="form-control" placeholder="paste your code here" id="codeInput" v-model="code"
+                            rows="5"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" @click='postButton' class="btn btn-primary">Submit</button>
                 </form>
             </div>
 
@@ -76,7 +79,52 @@
     </div>
 
     <script>
+        window.addEventListener('load', async function () {
+            await loaded();
+        });
 
+        async function loaded() {
+            var postPage = await new Vue({
+                el: '#postPage',
+                data: {
+                    author: '',
+                    title: '',
+                    description: '',
+                    code: '',
+                    codes: [],
+                },
+                methods: {
+                    postButton: function () {
+                        // POST request using fetch() 
+                        fetch("https://code-share-rbh.herokuapp.com/code", {
+
+                            // Adding method type 
+                            method: "POST",
+
+                            // Adding body or contents to send 
+                            body: JSON.stringify({
+                                "author": this.author,
+                                "title": this.title,
+                                "description": this.description,
+                                "code": this.code
+                            }),
+
+                            // Adding headers to the request 
+                            headers: {
+                                "Content-type": "application/json; charset=UTF-8"
+                            }
+                        })
+
+                            // Converting to JSON 
+                            .then(response => response.json())
+
+                            // Displaying results to console 
+                            .then(json => console.log(json));
+                    }
+                },
+
+            });
+        }
     </script>
 </body>
 
