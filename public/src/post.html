@@ -43,31 +43,30 @@
         <section id="postPage">
 
             <div class="form-div">
-                <form @submit.prevent="postButton">
-                    <div class="mb-3">
-                        <label for="authorInput " class="form-label">Name of Author</label>
-                        <input type="text" class="form-control" id="authorInput" v-model="author"
-                            placeholder="anonymous">
 
-                    </div>
-                    <div class="mb-3">
-                        <label for="titleInput" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="titleInput" v-model="title"
-                            placeholder="title of the program">
+                <div class="mb-3">
+                    <label for="authorInput " class="form-label">Name of Author</label>
+                    <input type="text" class="form-control" id="authorInput" v-model="author" placeholder="anonymous">
 
-                    </div>
-                    <div class="mb-3">
-                        <label for="descriptionInput" class="form-label">Description</label>
-                        <textarea class="form-control" id="descriptionInput" placeholder="explain the program briefly"
-                            v-model="description" rows="2"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="codeInput" class="form-label">Paste the Code here</label>
-                        <textarea class="form-control" placeholder="paste your code here" id="codeInput" v-model="code"
-                            rows="5"></textarea>
-                    </div>
-                    <button type="submit" @click='postButton' class="btn btn-primary">Submit</button>
-                </form>
+                </div>
+                <div class="mb-3">
+                    <label for="titleInput" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="titleInput" v-model="title"
+                        placeholder="title of the program">
+
+                </div>
+                <div class="mb-3">
+                    <label for="descriptionInput" class="form-label">Description</label>
+                    <textarea class="form-control" id="descriptionInput" placeholder="explain the program briefly"
+                        v-model="description" rows="2"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="codeInput" class="form-label">Paste the Code here</label>
+                    <textarea class="form-control" placeholder="paste your code here" id="codeInput" v-model="code"
+                        rows="5"></textarea>
+                </div>
+                <a @click='postButton' class="btn btn-primary">Submit</a>
+
             </div>
 
 

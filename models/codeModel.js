@@ -20,7 +20,7 @@ const codeSchema = new mongoose.Schema({
     default: 'anonymous',
     trim: true,
   },
-  posted: {
+  date: {
     type: Date,
     default: Date.now,
   },
