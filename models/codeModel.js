@@ -4,6 +4,7 @@ const codeSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+    trim: true,
   },
   description: {
     type: String,
@@ -17,6 +18,7 @@ const codeSchema = new mongoose.Schema({
   author: {
     type: String,
     default: 'anonymous',
+    trim: true,
   },
   posted: {
     type: Date,
