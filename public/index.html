@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <p>{{code.description}}</p>
-                                        <pre><code class="language-c" v-html="code.code">
+                                        <pre><code class="language-C" v-html="code.code">
 
                                         </code></pre>
 
@@ -166,7 +166,17 @@
                         .then((response) => response.json())
                         .then((json) => {
                             console.log(json);
+
+
+
                             this.codes = json;
+
+                            // < > changed to appropriate Entity Name 
+                            this.codes.forEach(e => {
+                                e.code = e.code.replaceAll('<', '&lt;');
+                                e.code = e.code.replaceAll('>', '&gt;');
+                            });
+
                         })
                         .catch((err) => console.log(err));
                 },
