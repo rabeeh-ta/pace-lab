@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
+    <title>Admin</title>
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -40,12 +40,39 @@
 
 
 
+        <section id="adminPage">
 
+
+
+
+
+        </section>
 
 
     </div>
 
+    <script>
+        window.addEventListener('load', async function () {
+            await loaded();
+        });
 
+        async function loaded() {
+            var adminPage = await new Vue({
+                el: '#adminPage',
+                data: {
+                    author: '',
+                    title: '',
+                    description: '',
+                    code: '',
+                    codes: [],
+                },
+                methods: {
+
+                },
+
+            });
+        }
+    </script>
 </body>
 
 </html>
