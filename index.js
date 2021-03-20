@@ -1,6 +1,7 @@
 require('./db/mongoose');
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 
 const codeRouter = require('./routes/codeRoutes');
 const frontRouter = require('./routes/frontEnd');
@@ -10,6 +11,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 //? express configurations
+app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 app.use(codeRouter);
