@@ -25,6 +25,10 @@ nav a:hover {
   font-size: bold;
 }
 
+.link-live {
+  color: #f0c8d5;
+}
+
 nav ul {
   padding-top: 20px;
 }
