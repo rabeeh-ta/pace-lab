@@ -31,10 +31,10 @@
             <a class="display-4 stickFont" href="/">codeshare</a>
             <ul class="list-inline pt-4 light">
 
-                <li class="list-inline-item "><a href="../index.html">Home</a></li>
-                <li class="list-inline-item"><a href="/about.html">About</a></li>
-                <li class="list-inline-item"><a href="/post.html">Post</a></li>
-                <li class="list-inline-item"><a href="/admin.html">Admin</a></li>
+                <li class="list-inline-item "><a href="/">Home</a></li>
+                <li class="list-inline-item"><a href="./about.html">About</a></li>
+                <li class="list-inline-item"><a href="./post.html">Post</a></li>
+                <li class="list-inline-item"><a href="./admin.html">Admin</a></li>
             </ul>
         </nav>
 
@@ -46,7 +46,7 @@
 
                 <div class="mb-3">
                     <label for="authorInput " class="form-label">Name of Author</label>
-                    <input type="text" class="form-control" id="authorInput" v-model="author" placeholder="anonymous">
+                    <input type="text" class="form-control" id="authorInput" v-model="author" placeholder="John Doe">
 
                 </div>
                 <div class="mb-3">
@@ -58,7 +58,7 @@
                 <div class="mb-3">
                     <label for="descriptionInput" class="form-label">Description</label>
                     <textarea class="form-control" id="descriptionInput" placeholder="explain the program briefly"
-                        v-model="description" rows="2"></textarea>
+                        v-model="description" rows="2" maxlength="85"></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="codeInput" class="form-label">Paste the Code here</label>
