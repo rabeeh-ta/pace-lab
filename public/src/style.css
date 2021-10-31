@@ -88,3 +88,16 @@ section {
     padding-top: 4px;
   }
 }
+
+/* about page*/
+.img-section img {
+  width: 200px;
+  height: 300px;
+  border-radius: 25%;
+}
+
+.content-about {
+  margin: 10px;
+  color: white;
+  width: 70%;
+}
