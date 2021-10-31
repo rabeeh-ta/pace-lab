@@ -20,6 +20,7 @@ router.get('/post', (req, res) => {
 router.get('/panel', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/src/adminpanel.html'));
 });
+
 router.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/src/404.html'));
 });

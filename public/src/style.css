@@ -101,3 +101,44 @@ section {
   color: white;
   width: 70%;
 }
+
+/* f404 page */
+.fourOfour h1 {
+  color: white;
+  margin: 0 0 0 18px;
+}
+.fourOfour img {
+  width: 120px;
+  border-radius: 50%;
+}
+
+.fourOfour {
+  width: 70vh;
+  height: 70vw;
+}
+
+@keyframes hor-movement {
+  from {
+    margin-left: 0%;
+  }
+  to {
+    margin-left: 100%;
+  }
+}
+
+@keyframes ver-movement {
+  from {
+    margin-top: 0%;
+  }
+  to {
+    margin-top: 100%;
+  }
+}
+
+.fourOfour img {
+  animation-name: hor-movement, ver-movement;
+  animation-duration: 6.141s, 3.414s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+}
