@@ -42,8 +42,22 @@
 
         <section id="admin-section">
 
-            <p>admin section</p>
+            <div class="form-div">
 
+                <div class="mb-3">
+                    <label for="username " class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" v-model="author" placeholder="@username">
+
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="text" class="form-control" id="passwrod" v-model="title" placeholder="password">
+                </div>
+
+                <a @click='loginButton' class="btn btn-primary">Submit</a>
+
+
+            </div>
 
 
         </section>
