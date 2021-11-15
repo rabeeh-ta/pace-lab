@@ -32,7 +32,33 @@ router.post('/register', async (req, res) => {
   } catch (e) {
     res.status(400).send(e);
   }
-  // res.status(200).send('success');
+});
+
+// login routes
+router.post('/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // find user by using email and do auth
+    User.findOne({ email }, (err, user) => {
+      // no user found with the given email
+      if (user == null) {
+        return res.status(400).send('No user found, Please Register.');
+      }
+
+      // check password match with found user and passed password
+      bcrypt.compare(password, user.password).then((passwordMatched) => {
+        if (passwordMatched) {
+          // give a jwt
+          return res.status(200).send('success!!!');
+        } else {
+          return res.status(400).send('wrong password');
+        }
+      });
+    });
+  } catch (e) {
+    res.status(400).send(e);
+  }
 });
 
 module.exports = router;
