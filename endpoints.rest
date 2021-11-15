@@ -1,0 +1,20 @@
+GET http://localhost:3000/codes
+
+###
+POST http://localhost:3000/register
+Content-Type: application/json
+
+{
+    "name":"rabeeh",
+    "email": "rabeeh@gmail.com",
+    "password": "admin"
+}
+
+###
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "email":"rabeeh@gmail.com",
+    "password": "admin"
+}
