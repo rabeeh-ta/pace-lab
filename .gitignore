@@ -2,3 +2,4 @@
 configs.txt
 .DS_Store
 apicalls.rest
+.env
