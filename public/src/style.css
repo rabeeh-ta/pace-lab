@@ -142,8 +142,3 @@ section {
   animation-direction: alternate;
   animation-timing-function: linear;
 }
-
-/* admin page */
-#admin-section {
-  width: 250px;
-}
