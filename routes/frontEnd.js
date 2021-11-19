@@ -1,8 +1,26 @@
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
 const path = require('path');
 const express = require('express');
+
 const { dirname } = require('path');
 
 const router = new express.Router();
+
+//? middle ware function where it will check if the JWT that the user has send is valid or not.
+var authenticateJWT = function (req, res, next) {
+  console.log('middleware is on baby');
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; //if there is a jwt token passed then return the token else UNDEFINED, the split(' ')[1] will get the token part from the string passed in the Header "Bearer KEY"
+
+  if (token == null) return res.sendStatus(401); // if no token is passed then no access granted login
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403); // you have a token but it is not valid
+    req.user = user; // user => the decrypted value which was inside the JWT
+    next();
+  });
+};
 
 //? frontend html serving routes
 router.get('/', (req, res) => {
@@ -17,8 +35,8 @@ router.get('/post', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/src/post.html'));
 });
 
-router.get('/panel', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/src/adminpanel.html'));
+router.get('/admin', authenticateJWT, (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/src/admin.html'));
 });
 
 router.get('/*', (req, res) => {
