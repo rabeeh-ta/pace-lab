@@ -29,14 +29,14 @@ router.post('/register', async (req, res) => {
 
   try {
     await user.save();
-    res.status(201).send('user ' + user.user + ' saved.');
+    res.status(201).send('new user ' + user.user + ' registered.');
     console.log(user);
   } catch (e) {
     res.status(400).send(e);
   }
 });
 
-// login routes
+//? login route
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
