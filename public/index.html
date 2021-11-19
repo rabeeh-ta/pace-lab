@@ -36,7 +36,7 @@
                 <li class="list-inline-item "><a class="link-live" href="/">Home</a></li>
                 <li class="list-inline-item"><a href="./src/about.html">About</a></li>
                 <li class="list-inline-item"><a href="./src/post.html">Post</a></li>
-                <li class="list-inline-item"><a href="./src/admin.html">Admin</a></li>
+                <li class="list-inline-item"><a href="./admin">Admin</a></li>
             </ul>
         </nav>
 
@@ -46,7 +46,7 @@
             <div v-for="code in codes" :key="code._id" class="card" style="width: 20rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{code.title}}</h5>
-                    <h6 class="card-subtitle mb-1 mx-3 text-muted">- {{code.author}}</h6>
+                    <h6 class="card-subtitle mb-1 mx-3 text-muted">@{{code.author}}</h6>
                     <p class="card-text">{{code.description}}</p>
                     <div class="cardFooter">
                         <span class="text-muted text-italic small"><em>Posted:{{code.posted}}</em></span>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
+    <title>CodeShare</title>
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -19,9 +19,11 @@
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
         crossorigin="anonymous"></script>
 
-
+    <!-- prism-js for code highlighting -->
+    <link rel="stylesheet" href="./src/prism.css">
+    <script src="./src/prism.js"></script>
     <!-- my styles -->
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./src/style.css">
 </head>
 
 <body>
@@ -34,32 +36,51 @@
                 <li class="list-inline-item "><a href="/">Home</a></li>
                 <li class="list-inline-item"><a href="./about.html">About</a></li>
                 <li class="list-inline-item"><a href="./post.html">Post</a></li>
-                <li class="list-inline-item"><a class="link-live" href="./admin.html">Admin</a></li>
+                <li class="list-inline-item"><a class="live-link" href="/admin">Admin</a></li>
             </ul>
         </nav>
 
 
+        <section id="adminPage">
 
-        <section id="admin-section">
+            <h1>this is the admin page login to access here</h1>
 
-            <div class="form-div">
+            <div v-for="code in codes" :key="code._id" class="card" style="width: 20rem;">
+                <div class="card-body">
+                    <h5 class="card-title">{{code.title}}</h5>
+                    <h6 class="card-subtitle mb-1 mx-3 text-muted">- {{code.author}}</h6>
+                    <p class="card-text">{{code.description}}</p>
+                    <div class="cardFooter">
+                        <span class="text-muted text-italic small"><em>Posted:{{code.posted}}</em></span>
+                        <!-- Button trigger modal -->
+                        <button type="button" href="#" class="card-link btn " data-bs-toggle="modal"
+                            :data-bs-target="`#mid${code._id}`">Code</button>
 
-                <div class="mb-3">
-                    <label for="username " class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" v-model="author" placeholder="@username">
 
+                        <!-- Modal -->
+                        <div class="modal" :id="`mid${code._id}`">
+                            <div class="modal-dialog modal-lg ">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <div class="modal-title">{{code.title}}</div>
+
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>{{code.description}}</p>
+                                        <pre><code class="language-c" v-html="code.code">
+
+                                        </code></pre>
+
+                                    </div>
+                                    <div class="modal-footer"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="text" class="form-control" id="passwrod" v-model="title" placeholder="password">
-                </div>
-
-                <a @click='loginButton' class="btn btn-primary">Submit</a>
-
-
             </div>
-
-
         </section>
 
 
@@ -74,18 +95,33 @@
             var adminPage = await new Vue({
                 el: '#adminPage',
                 data: {
-                    author: '',
-                    title: '',
-                    description: '',
-                    code: '',
                     codes: [],
                 },
-                methods: {
+                created() {
+                    fetch('https://code-share-rbh.herokuapp.com/codes', {
+                        method: 'GET',
+                        headers: { 'Content-type': 'application/json;charset=UTF-8' },
+                    })
+                        .then((response) => response.json())
+                        .then((json) => {
+                            this.codes = json;
 
+                            // preprocessing data for UI
+                            this.codes.forEach(e => {
+                                // < > changing this to appropriate codes
+                                e.code = e.code.replaceAll('<', '&lt;');
+                                e.code = e.code.replaceAll('>', '&gt;');
+                                // getting the date for use date-month-year
+                                e.posted = new Date(e.date)
+                                e.posted = e.posted.toDateString();
+                            });
+
+                        })
+                        .catch((err) => console.log(err));
                 },
-
             });
         }
+
     </script>
 </body>
 
