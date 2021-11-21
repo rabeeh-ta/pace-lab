@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
+    <title>Login</title>
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -21,7 +21,7 @@
 
 
     <!-- my styles -->
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./src/style.css">
 </head>
 
 <body>
@@ -32,8 +32,8 @@
             <ul class="list-inline pt-4 light">
 
                 <li class="list-inline-item "><a href="/">Home</a></li>
-                <li class="list-inline-item"><a href="./about.html">About</a></li>
-                <li class="list-inline-item"><a href="./post.html">Post</a></li>
+                <li class="list-inline-item"><a href="./src/about.html">About</a></li>
+                <li class="list-inline-item"><a href="./src/post.html">Post</a></li>
                 <li class="list-inline-item"><a class="link-live" href="/admin">Admin</a></li>
             </ul>
         </nav>
@@ -45,13 +45,14 @@
             <div class="form-div">
 
                 <div class="mb-3">
-                    <label for="username " class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" v-model="author" placeholder="@username">
+                    <label for="username " class="form-label">Email</label>
+                    <input type="text" class="form-control" id="username" v-model="email"
+                        placeholder="someone@mail.com">
 
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="text" class="form-control" id="passwrod" v-model="title" placeholder="password">
+                    <input type="text" class="form-control" id="passwrod" v-model="password" placeholder="password">
                 </div>
 
                 <a @click='loginButton' class="btn btn-primary">Submit</a>
@@ -74,14 +75,45 @@
             var loginPage = await new Vue({
                 el: '#loginPage',
                 data: {
-                    author: '',
-                    title: '',
-                    description: '',
-                    code: '',
-                    codes: [],
+                    email: "",
+                    password: "",
+                    feedback: "",
                 },
                 methods: {
+                    loginButton: function () {
+                        //sanitize the input email & password.
+                        this.email = this.email.toLowerCase().trim();
+                        this.password = this.password.trim();
 
+                        //! make POST request => "/login" route
+                        fetch("https://code-share-rbh.herokuapp.com/login", {
+                            method: "POST",
+                            headers: {  //! Adding headers to the request 
+                                "Content-type": "application/json; charset=UTF-8"
+                            },
+                            body: JSON.stringify({
+                                "email": this.email,
+                                "password": this.password
+                            })
+                        })
+                            .then((response) => {
+                                response.json().then((data) => {
+
+                                    if (response.status == 200) {//! SUCCESS ==> save JWT to cookie and redirect to "/admin"
+                                        console.log(data.accessToken);
+                                        document.cookie = `authorization=${data.accessToken};Secure`
+                                        window.location = "https://code-share-rbh.herokuapp.com/admin"
+                                    } else { //! ERROR show feedback => wrongpassword,no user found/register, etc.
+                                        this.feedback = data.error;
+                                        console.log(this.feedback);
+                                    }
+                                })
+
+
+                            })
+
+
+                    }
                 },
 
             });
