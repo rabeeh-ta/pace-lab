@@ -142,3 +142,10 @@ section {
   animation-direction: alternate;
   animation-timing-function: linear;
 }
+
+/* login page */
+.feedback {
+  color: #fff323;
+  font-style: italic;
+  margin-left: 30px;
+}

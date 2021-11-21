@@ -47,15 +47,15 @@
                 <div class="mb-3">
                     <label for="username " class="form-label">Email</label>
                     <input type="text" class="form-control" id="username" v-model="email"
-                        placeholder="someone@mail.com">
+                        placeholder="someone@example.com">
 
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="text" class="form-control" id="passwrod" v-model="password" placeholder="password">
+                    <input type="password" class="form-control" id="passwrod" v-model="password" placeholder="password">
                 </div>
 
-                <a @click='loginButton' class="btn btn-primary">Submit</a>
+                <a @click='loginButton' class="btn btn-primary">Submit</a> <span class="feedback">{{feedback}}</span>
 
 
             </div>
@@ -81,9 +81,14 @@
                 },
                 methods: {
                     loginButton: function () {
+
+                        // check if flied is empty
+                        if (this.email == "" || this.password == "") return this.feedback = "Enter email & password.";
+
                         //sanitize the input email & password.
                         this.email = this.email.toLowerCase().trim();
                         this.password = this.password.trim();
+                        this.feedback = ""; // clear feedback
 
                         //! make POST request => "/login" route
                         fetch("https://code-share-rbh.herokuapp.com/login", {
@@ -100,12 +105,10 @@
                                 response.json().then((data) => {
 
                                     if (response.status == 200) {//! SUCCESS ==> save JWT to cookie and redirect to "/admin"
-                                        console.log(data.accessToken);
                                         document.cookie = `authorization=${data.accessToken};Secure`
                                         window.location = "https://code-share-rbh.herokuapp.com/admin"
                                     } else { //! ERROR show feedback => wrongpassword,no user found/register, etc.
                                         this.feedback = data.error;
-                                        console.log(this.feedback);
                                     }
                                 })
 
