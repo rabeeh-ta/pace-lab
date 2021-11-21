@@ -2,6 +2,7 @@ require('./db/mongoose');
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const codeRouter = require('./routes/codeRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -15,6 +16,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
+app.use(cookieParser());
 
 //? application logic/backend routes
 app.use(codeRouter);
