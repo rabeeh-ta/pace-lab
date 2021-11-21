@@ -30,7 +30,6 @@ router.post('/register', async (req, res) => {
   try {
     await user.save();
     res.status(201).send('new user ' + user.user + ' registered.');
-    console.log(user);
   } catch (e) {
     res.status(400).send(e);
   }
@@ -40,12 +39,13 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-
     // find user by using email and do auth
     User.findOne({ email }, (err, user) => {
       // no user found with the given email
       if (user == null) {
-        return res.status(400).send('No user found, Please Register.');
+        return res
+          .status(401)
+          .send({ error: 'No user found, Please Register.' });
       }
 
       // check password match with found user and passed password
@@ -59,7 +59,7 @@ router.post('/login', async (req, res) => {
 
           return res.status(200).send({ accessToken });
         } else {
-          return res.status(400).send('wrong password');
+          return res.status(401).send({ error: 'Wrong Password!' });
         }
       });
     });
