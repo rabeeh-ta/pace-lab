@@ -73,6 +73,10 @@ section {
   font-weight: bold;
 }
 
+.btn-red {
+  color: #b91646 !important;
+}
+
 .form-div {
   margin: 0 auto;
   width: 500px;
