@@ -62,7 +62,13 @@
                                     <div class="modal-header">
                                         <div class="modal-title">{{code.title}}</div>
 
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        <div>
+                                            <button type="button" class="btn" @click="copyToClipboard(code._id)"> copy
+                                                the code</button>
+
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+
                                     </div>
                                     <div class="modal-body">
                                         <p>{{code.description}}</p>
@@ -117,6 +123,13 @@
                         })
                         .catch((err) => console.log(err));
                 },
+                methods: {
+                    copyToClipboard: function (codeId) {
+                        console.log(codeId);
+                        let codeToClipboard = this.codes.find(code => code._id == codeId);
+                        console.log(codeToClipboard.title);
+                    }
+                }
             });
         }
 
