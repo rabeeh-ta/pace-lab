@@ -63,8 +63,9 @@
                                         <div class="modal-title">{{code.title}}</div>
 
                                         <div>
-                                            <button type="button" class="btn" @click="copyToClipboard(code._id)"> copy
-                                                the code</button>
+                                            <button type="button" id="copyBtn" class="btn btn-copy"
+                                                @click="copyToClipboard(code._id)"> Copy
+                                            </button>
 
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
@@ -125,9 +126,12 @@
                 },
                 methods: {
                     copyToClipboard: function (codeId) {
-                        console.log(codeId);
                         let codeToClipboard = this.codes.find(code => code._id == codeId);
-                        console.log(codeToClipboard.title);
+                        navigator.clipboard.writeText(codeToClipboard.code);
+
+                        const copyBtn = document.getElementById('copyBtn');
+                        copyBtn.innerHTML = "Copied";
+
                     }
                 }
             });

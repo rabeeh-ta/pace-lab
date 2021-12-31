@@ -77,8 +77,12 @@ section {
   color: #b91646 !important;
 }
 
-.btn-red {
-  color: black !important;
+.btn-copy {
+  color: #146356 !important;
+  border-radius: 5;
+  font-size: 12px;
+  border: 2px solid #00917c;
+  margin-right: 10px;
 }
 
 .form-div {
