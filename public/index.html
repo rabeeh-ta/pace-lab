@@ -63,7 +63,7 @@
                                         <div class="modal-title">{{code.title}}</div>
 
                                         <div>
-                                            <button type="button" id="copyBtn" class="btn btn-copy"
+                                            <button type="button" :id="code._id" class="btn btn-copy"
                                                 @click="copyToClipboard(code._id)"> Copy
                                             </button>
 
@@ -129,7 +129,7 @@
                         let codeToClipboard = this.codes.find(code => code._id == codeId);
                         navigator.clipboard.writeText(codeToClipboard.code);
 
-                        const copyBtn = document.getElementById('copyBtn');
+                        const copyBtn = document.getElementById(codeId);
                         copyBtn.innerHTML = "Copied";
 
                     }
