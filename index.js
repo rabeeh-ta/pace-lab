@@ -12,12 +12,6 @@ const frontRouter = require('./routes/frontEnd');
 const app = express();
 const port = process.env.PORT || 3000;
 
-//? express configurations
-app.use(cors());
-app.use(express.json());
-app.use(express.static('public'));
-app.use(cookieParser());
-
 //? redirect http to https
 app.use((req, res, next) => {
   if (process.env.NODE_ENV == 'production') {
@@ -27,6 +21,12 @@ app.use((req, res, next) => {
     else return next();
   } else return next();
 });
+
+//? express configurations
+app.use(cors());
+app.use(express.json());
+app.use(express.static('public'));
+app.use(cookieParser());
 
 //? application logic/backend routes
 app.use(codeRouter);
