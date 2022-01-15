@@ -1,5 +1,6 @@
 const express = require('express');
 const Code = require('../models/codeModel');
+const Trash = require('../models/trashModel');
 
 const router = new express.Router();
 
@@ -42,16 +43,29 @@ router.get('/codes/:id', async (req, res) => {
 //? delete a code file
 router.delete('/codes/:id', async (req, res) => {
   const _id = req.params.id;
+
+  var trashSchema = {};
   try {
     const found = await Code.findByIdAndDelete(_id);
+    // const found = await Code.findById(_id).lean();
+    if (found) {
+      trashSchema = found.lean();
+      delete trashSchema._id;
+      trashSchema.deletedOn = Date.now();
+      trashSchema.deletedBy = 'rbh';
+      const trash = await new Trash(trashSchema).save();
+    }
 
     if (!found) {
       return res.status(404).send({ response: 'Code file not found.' });
     }
 
-    res.status(200).send({ response: 'Deletion Successful' });
+    res
+      .status(200)
+      .send({ response: 'Deleted and Moved to Recently deleted.' });
   } catch (e) {
     res.status(500).send(e);
+    console.log(e);
   }
 });
 
