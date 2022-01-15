@@ -1,8 +1,30 @@
 const express = require('express');
+require('dotenv').config();
+const jwt = require('jsonwebtoken');
 const Code = require('../models/codeModel');
 const Trash = require('../models/trashModel');
+const User = require('../models/userModel');
 
 const router = new express.Router();
+
+//? middle ware function where it will check if the JWT that the user has send is valid or not.
+var authenticateJWT = function (req, res, next) {
+  //! "Bearer JWT" authorization from req header.
+  const authHeader = req.headers['authorization'];
+  var token = authHeader && authHeader.split(' ')[1]; //if there is a jwt token passed then return the token else UNDEFINED, the split(' ')[1] will get the token part from the string passed in the Header "Bearer KEY"
+
+  //! "cookie" based authorization from req header.
+  //? if there is jwt in req cookie then that is the token
+  if (req.cookies.authorization != undefined) token = req.cookies.authorization;
+
+  if (token == null) return res.redirect('/login'); // if no token is passed then no access granted login
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403); // you have a token but it is not valid
+    req.user = user; // user => the decrypted value which was inside the JWT
+    next();
+  });
+};
 
 //? create a new code file
 router.post('/code', async (req, res) => {
@@ -41,22 +63,25 @@ router.get('/codes/:id', async (req, res) => {
 });
 
 //? delete a code file
-router.delete('/codes/:id', async (req, res) => {
-  const _id = req.params.id;
+router.delete('/codes/:id', authenticateJWT, async (req, res) => {
+  const _id = req.params.id; // the id of the code needs to  be deleted
+  const uid = req.user.userId; // the users id who is logged in now
 
-  var trashSchema = {};
+  var trashSchema = {}; // the object to save to trash
+
   try {
-    const found = await Code.findByIdAndDelete(_id);
-    // const found = await Code.findById(_id).lean();
-    if (found) {
-      trashSchema = found.lean();
-      delete trashSchema._id;
-      trashSchema.deletedOn = Date.now();
-      trashSchema.deletedBy = 'rbh';
-      const trash = await new Trash(trashSchema).save();
+    const deletedCode = await Code.findByIdAndDelete(_id).lean();
+    // const deletedCode = await Code.findById(_id).lean();
+    if (deletedCode) {
+      const user = await User.findById(uid); // get the user info with id
+      trashSchema = deletedCode; // the
+      delete trashSchema._id; // delete the id field
+      trashSchema.deletedOn = Date.now(); // adding two new fields
+      trashSchema.deletedBy = user.user;
+      const trash = await new Trash(trashSchema).save(); // save the deleted code to trash.
     }
 
-    if (!found) {
+    if (!deletedCode) {
       return res.status(404).send({ response: 'Code file not found.' });
     }
 
