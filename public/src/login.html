@@ -106,7 +106,8 @@
 
                                     if (response.status == 200) {//! SUCCESS ==> save JWT to cookie and redirect to "/admin"
                                         document.cookie = `authorization=${data.accessToken};Secure`
-                                        window.location = "https://pace-lab.herokuapp.com/admin"
+                                        window.location = "https://pace-lab.herokuapp.com/admin";
+                                        // window.location = "localhost:3000/admin"
                                     } else { //! ERROR show feedback => wrongpassword,no user found/register, etc.
                                         this.feedback = data.error;
                                     }
