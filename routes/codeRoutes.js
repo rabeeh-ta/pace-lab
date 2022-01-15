@@ -74,10 +74,10 @@ router.delete('/codes/:id', authenticateJWT, async (req, res) => {
     // const deletedCode = await Code.findById(_id).lean();
     if (deletedCode) {
       const user = await User.findById(uid); // get the user info with id
-      trashSchema = deletedCode; // the
+      trashSchema = deletedCode;
       delete trashSchema._id; // delete the id field
       trashSchema.deletedOn = Date.now(); // adding two new fields
-      trashSchema.deletedBy = user.user;
+      trashSchema.deletedBy = user.user; // name of the user.
       const trash = await new Trash(trashSchema).save(); // save the deleted code to trash.
     }
 
