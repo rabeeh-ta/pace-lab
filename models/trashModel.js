@@ -15,14 +15,23 @@ const trashSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  author: {
+    type: String,
+    default: 'anonymous',
+    trim: true,
+  },
   deletedBy: {
     type: String,
     default: 'anonymous',
     trim: true,
   },
-  dateOn: {
+  deletedOn: {
     type: Date,
     default: Date.now,
+  },
+  date: {
+    type: Date,
+    required: true,
   },
 });
 
