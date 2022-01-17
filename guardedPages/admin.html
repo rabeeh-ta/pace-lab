@@ -32,7 +32,7 @@
 
 <body>
 
-    <div class="container">
+    <div class="container" id="adminPage">
         <nav class="my-nav">
             <a class="display-4 stickFont" href="/">PaceLab</a>
             <ul class="list-inline pt-4 light">
@@ -44,16 +44,17 @@
             </ul>
         </nav>
         <div class="admin-control-panel">
-            <a><span class="fas fa-database"> </span>Database
+
+            <a @click="viewToggle('database')"><span class="fas fa-database"> </span>Database
             </a>
-            <a><span class="fas fa-trash">
+            <a @click="viewToggle('recentlyDeleted')"><span class="fas fa-trash">
                 </span>Recently-Deleted </a>
         </div>
 
 
-        <section id="adminPage">
+        <section>
 
-            <div v-for="code in codes" :key="code._id" class="card" style="width: 20rem;">
+            <div v-for="code in renderContent" :key="code._id" class="card" style="width: 20rem;">
                 <div class="card-body">
                     <h5 class="card-title">{{code.title}}</h5>
                     <h6 class="card-subtitle mb-1 mx-3 text-muted">- {{code.author}}</h6>
@@ -61,7 +62,9 @@
                     <div class="cardFooter">
                         <span class="text-muted text-italic small"><em>Posted:{{code.posted}}</em></span>
                         <!-- Button trigger modal -->
-                        <button @click="deleteCode(code._id)" class="card-link btn btn-red ">Delete</button>
+                        <button @click="deleteCode(code._id)" :class="code.deletedBy ? 'btn-green':'btn-red'"
+                            class="card-link btn ">{{code.deletedBy?
+                            'Recover':'Delete'}}</button>
                     </div>
                 </div>
             </div>
@@ -80,8 +83,12 @@
                 el: '#adminPage',
                 data: {
                     codes: [],
+                    recentlyDeleted: [],
+                    renderContent: [],
+                    dashboardView: 'database',
                 },
                 created() {
+                    //? GET all the code files from DB
                     fetch('https://pace-lab.herokuapp.com/codes', {
                         method: 'GET',
                         headers: { 'Content-type': 'application/json;charset=UTF-8' },
@@ -100,11 +107,37 @@
                                 e.posted = e.posted.toDateString();
                             });
 
+                            this.renderContent = this.codes;
+
                         })
                         .catch((err) => console.log(err));
+
+                    //? GET recently deleted files from DB
+
+                    fetch("https://pace-lab.herokuapp.com/trashBin", {
+                        method: 'GET',
+                        headers: { 'Content-type': 'application/json;charset=UTF-8' },
+                    })
+                        .then((response) => response.json())
+                        .then((json) => {
+                            this.recentlyDeleted = json;
+
+                            // preprocessing data for UI
+                            this.recentlyDeleted.forEach(e => {
+                                // < > changing this to appropriate codes
+                                e.code = e.code.replaceAll('<', '&lt;');
+                                e.code = e.code.replaceAll('>', '&gt;');
+                                // getting the date for use date-month-year
+                                e.posted = new Date(e.date)
+                                e.posted = e.posted.toDateString();
+                            });
+                            console.log(this.recentlyDeleted);
+                        })
+                        .catch((err) => console.log(err));
+
                 },
                 methods: {
-                    deleteCode: function (codeId) {
+                    deleteCode(codeId) {
                         // console.log(codeId);
                         fetch(`https://pace-lab.herokuapp.com/codes/${codeId}`, {
                             method: 'DELETE'
@@ -115,6 +148,18 @@
                             })
                             .catch(err => console.log(err));
                     },
+                    viewToggle(toggle) {
+                        // toggle logic 
+                        if (this.dashboardView != toggle) {
+                            this.dashboardView = toggle;
+                        }
+                        // render the content to the DOM on the state of the button
+                        if (this.dashboardView === 'database') {
+                            this.renderContent = this.codes;
+                        } else if (this.dashboardView === 'recentlyDeleted') {
+                            this.renderContent = this.recentlyDeleted;
+                        }
+                    }
                 }
             });
         }
