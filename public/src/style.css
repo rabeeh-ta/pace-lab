@@ -41,7 +41,7 @@ nav li > a:hover {
 }
 
 section {
-  margin-top: 4%;
+  margin-top: 1%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -160,4 +160,24 @@ section {
   color: #fff323;
   font-style: italic;
   margin-left: 30px;
+}
+
+/* admin page */
+.admin-control-panel {
+  color: white;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 10px;
+}
+.admin-control-panel a {
+  padding-left: 25px;
+  cursor: pointer;
+}
+.admin-control-panel a span {
+  margin-right: 7px;
+}
+
+.admin-panel-active-btn {
+  color: #fff323 !important;
 }
