@@ -28,6 +28,16 @@ router.get('/codes', async (req, res) => {
   }
 });
 
+//? Read all codes recently deleted
+router.get('/trashBin', async (req, res) => {
+  try {
+    const trash = await Trash.find().sort({ posted: 'desc' });
+    res.status(200).send(trash);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
 //? get one by ID
 router.get('/codes/:id', async (req, res) => {
   const _id = req.params.id;
