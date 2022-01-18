@@ -28,16 +28,6 @@ router.get('/codes', async (req, res) => {
   }
 });
 
-//? Read all codes recently deleted
-router.get('/trashBin', async (req, res) => {
-  try {
-    const trash = await Trash.find().sort({ posted: 'desc' });
-    res.status(200).send(trash);
-  } catch (e) {
-    res.status(400).send(e);
-  }
-});
-
 //? get one by ID
 router.get('/codes/:id', async (req, res) => {
   const _id = req.params.id;
@@ -85,7 +75,6 @@ router.delete('/codes/:id', authenticateJWT, async (req, res) => {
 });
 
 //? update a file
-
 router.put('/codes/:id', async (req, res) => {
   const _id = req.params.id;
   const updates = Object.keys(req.body);
@@ -109,6 +98,33 @@ router.put('/codes/:id', async (req, res) => {
     res.status(404).send({ response: 'updating a code is under maintenance' });
   } catch (e) {
     res.status(500).send(e);
+  }
+});
+
+//! trash bin routes
+
+//? Read all codes recently deleted
+router.get('/trashBin', async (req, res) => {
+  try {
+    const trash = await Trash.find().sort({ posted: 'desc' });
+    res.status(200).send(trash);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+router.delete('/trashBin/:id', async (req, res) => {
+  const _id = req.params.id;
+
+  try {
+    const deletedFromBin = await Trash.findByIdAndDelete(_id);
+
+    if (!deletedFromBin) {
+      return res.status(404).send({ response: 'Code file not found.' });
+    }
+  } catch (e) {
+    res.status(500).send(e);
+    console.log(e);
   }
 });
 
