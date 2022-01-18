@@ -62,9 +62,10 @@
                     <div class="cardFooter">
                         <span class="text-muted text-italic small"><em>Posted:{{code.posted}}</em></span>
                         <!-- Button trigger modal -->
-                        <button @click="deleteCode(code._id)" :class="code.deletedBy ? 'btn-green':'btn-red'"
-                            class="card-link btn ">{{code.deletedBy?
-                            'Recover':'Delete'}}</button>
+                        <button @click="recoverCode(code._id)" v-if="code.deletedBy"
+                            class="card-link btn btn-green">Recover</button>
+                        <button @click="deleteCode(code._id)" v-else class="card-link btn btn-red">Delete</button>
+
                     </div>
                 </div>
             </div>
@@ -113,7 +114,6 @@
                         .catch((err) => console.log(err));
 
                     //? GET recently deleted files from DB
-
                     fetch("https://pace-lab.herokuapp.com/trashBin", {
                         method: 'GET',
                         headers: { 'Content-type': 'application/json;charset=UTF-8' },
@@ -131,7 +131,6 @@
                                 e.posted = new Date(e.date)
                                 e.posted = e.posted.toDateString();
                             });
-                            console.log(this.recentlyDeleted);
                         })
                         .catch((err) => console.log(err));
 
@@ -146,6 +145,41 @@
                             .then(data => {
                                 window.location = "https://pace-lab.herokuapp.com";
                             })
+                            .catch(err => console.log(err));
+                    },
+                    recoverCode(codeId) {
+
+                        //? get the code to recover.
+                        var codeToRecover;
+                        this.recentlyDeleted.forEach(code => {
+                            if (codeId == code._id) {
+                                codeToRecover = code;
+                            }
+                        });
+
+                        //POST to code
+                        fetch("https://pace-lab.herokuapp.com/code", {
+                            method: "POST", // Adding method type 
+                            body: JSON.stringify({  // Adding body or contents to send 
+                                "author": codeToRecover.author,
+                                "title": codeToRecover.title,
+                                "description": codeToRecover.description,
+                                "code": codeToRecover.code
+                            }),
+                            headers: {  // Adding headers to the request 
+                                "Content-type": "application/json; charset=UTF-8"
+                            }
+                        })
+                            // after code uploaded to mainDB delete code from trashDB
+                            .then(response => {
+                                fetch(`https://pace-lab.herokuapp.com/trashBin/${codeId}`, {
+                                    method: 'DELETE'
+                                })
+                                    .then(res => res.json())
+                                    .then(data => {
+                                        window.location = "https://pace-lab.herokuapp.com";
+                                    })
+                            }) // redirect after success
                             .catch(err => console.log(err));
                     },
                     viewToggle(toggle) {
