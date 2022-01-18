@@ -122,6 +122,10 @@ router.delete('/trashBin/:id', async (req, res) => {
     if (!deletedFromBin) {
       return res.status(404).send({ response: 'Code file not found.' });
     }
+
+    res
+      .status(200)
+      .send({ response: 'Deleted and Moved to Recently deleted.' });
   } catch (e) {
     res.status(500).send(e);
     console.log(e);
