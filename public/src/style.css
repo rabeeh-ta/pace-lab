@@ -174,13 +174,16 @@ section {
   padding: 10px;
 }
 .admin-control-panel a {
+  color: inherit;
   padding-left: 25px;
   cursor: pointer;
+  text-decoration: none;
 }
+
 .admin-control-panel a span {
   margin-right: 7px;
 }
 
-.admin-panel-active-btn {
+.adminPanelActiveBtn {
   color: #fff323 !important;
 }

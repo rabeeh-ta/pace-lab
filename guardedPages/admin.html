@@ -45,10 +45,14 @@
         </nav>
         <div class="admin-control-panel">
 
-            <a @click="viewToggle('database')"><span class="fas fa-database"> </span>Database
+            <a @click="viewToggle('database')"
+                :class="{adminPanelActiveBtn:(dashboardView == 'database' ? true : false)}">
+                <span class="fas fa-database "></span>Database
             </a>
-            <a @click="viewToggle('recentlyDeleted')"><span class="fas fa-trash">
-                </span>Recently-Deleted </a>
+            <a @click="viewToggle('recentlyDeleted')"
+                :class="{adminPanelActiveBtn:(dashboardView == 'recentlyDeleted' ? true : false)}">
+                <span class="fas fa-trash"></span>Recently-Deleted
+            </a>
         </div>
 
 
@@ -190,8 +194,10 @@
                         // render the content to the DOM on the state of the button
                         if (this.dashboardView === 'database') {
                             this.renderContent = this.codes;
+
                         } else if (this.dashboardView === 'recentlyDeleted') {
                             this.renderContent = this.recentlyDeleted;
+
                         }
                     }
                 }
