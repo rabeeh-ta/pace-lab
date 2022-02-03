@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PaceLab</title>
+    <title>Home</title>
 
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -127,7 +127,10 @@
                 methods: {
                     copyToClipboard: function (codeId) {
                         let codeToClipboard = this.codes.find(code => code._id == codeId);
-                        navigator.clipboard.writeText(codeToClipboard.code);
+                        codeToClipboard = codeToClipboard.code.replaceAll('&lt;', '<');
+                        codeToClipboard = codeToClipboard.replaceAll('&gt;', '>');
+                        console.log(codeToClipboard);
+                        navigator.clipboard.writeText(codeToClipboard);
 
                         const copyBtn = document.getElementById(codeId);
                         copyBtn.innerHTML = "Copied";
