@@ -64,12 +64,18 @@
                     <h6 class="card-subtitle mb-1 mx-3 text-muted">- {{code.author}}</h6>
                     <p class="card-text">{{code.description}}</p>
                     <div class="cardFooter">
-                        <span class="text-muted text-italic small"><em>Posted:{{code.posted}}</em></span>
+                        <span class="text-muted text-italic small">
+                            Posted: {{code.posted}}
+                        </span>
                         <!-- Button trigger modal -->
                         <button @click="recoverCode(code._id)" v-if="code.deletedBy"
                             class="card-link btn btn-green">Recover</button>
                         <button @click="deleteCode(code._id)" v-else class="card-link btn btn-red">Delete</button>
 
+                    </div>
+                    <div>
+                        <p v-if="code.deletedBy" class="small text-muted ">Permanently Deleted in <span
+                                class="text-danger fw-bold">{{code.deleteInDays}} days</span> </p>
                     </div>
                 </div>
             </div>
@@ -111,9 +117,7 @@
                                 e.posted = new Date(e.date)
                                 e.posted = e.posted.toDateString();
                             });
-
                             this.renderContent = this.codes;
-
                         })
                         .catch((err) => console.log(err));
 
@@ -134,6 +138,10 @@
                                 // getting the date for use date-month-year
                                 e.posted = new Date(e.date)
                                 e.posted = e.posted.toDateString();
+
+                                // calculate number of days until permanently deleted
+                                e.deleteInDays = (new Date(e.date).getDate() + 30) - new Date().getDate();
+
                             });
                         })
                         .catch((err) => console.log(err));
