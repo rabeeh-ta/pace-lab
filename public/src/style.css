@@ -45,12 +45,14 @@ section {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .card {
   text-decoration: none;
   color: black;
-  margin: 1.5%;
+  margin: 1%;
+  min-width: 300px;
   background-color: #e8e8e8;
 }
 
