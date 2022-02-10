@@ -69,8 +69,8 @@
                         </span>
                         <!-- Button trigger modal -->
                         <button @click="recoverCode(code._id)" v-if="code.deletedBy"
-                            class="card-link btn btn-green">Recover</button>
-                        <button @click="deleteCode(code._id)" v-else class="card-link btn btn-red">Delete</button>
+                            class="btn btn-green">Recover</button>
+                        <button @click="deleteCode(code._id)" v-else class="btn btn-red">Delete</button>
 
                     </div>
                     <div>
