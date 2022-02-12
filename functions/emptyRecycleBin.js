@@ -8,7 +8,9 @@ mongoose
   )
   .then(() => {
     console.log('Mongodb Connected');
+    process.exit();
   })
   .catch((e) => {
     console.log(e);
+    process.exit();
   });
