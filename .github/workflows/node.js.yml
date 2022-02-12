@@ -1,19 +1,15 @@
-
-
-name: Empty Recycle Bin
-
+name: Cron @ 😴
 on:
-  schedule: 
-    - cron: "30 6 * * *"
-  
+  schedule:
+    - cron: '30 6 * * *'
+
   workflow_dispatch:
-  
+
 env:
   MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -21,13 +17,12 @@ jobs:
         node-version: [14.x]
 
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
+      - uses: actions/checkout@v2
 
-        
-    - run: npm install
-    - run: node functions/emptyRecycleBin.js
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm install
+      - run: node functions/emptyRecycleBin.js
