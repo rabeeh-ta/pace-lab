@@ -1,7 +1,7 @@
 name: Cron @ 😴
 on:
   schedule:
-    - cron: '30 6 * * *'
+    - cron: '5 12 * * *'
 
   workflow_dispatch:
 
