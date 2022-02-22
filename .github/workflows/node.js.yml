@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 name: Cron at 😴
+=======
+name: Clear DB TrashBin
+>>>>>>> 82b1d6c1d563a805640cd61dff83464fd0c9fd32
 on:
   schedule:
-    - cron: '30 6 * * *'
+    - cron: '5 0 * * *'
 
   workflow_dispatch:
 
