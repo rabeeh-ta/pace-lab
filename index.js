@@ -28,6 +28,7 @@ app.use((req, res, next) => {
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
+app.use(express.static('downloads'));
 app.use(cookieParser());
 
 //? application logic/backend routes
