@@ -1,4 +1,4 @@
-name: Cron @ 😴
+name: Cron at 😴
 on:
   schedule:
     - cron: '30 6 * * *'
@@ -9,7 +9,7 @@ env:
   MONGO_PASSWORD: ${{secrets.MONGO_PASSWORD}}
 
 jobs:
-  build:
+  cleanTrashBin:
     runs-on: ubuntu-latest
 
     strategy:
