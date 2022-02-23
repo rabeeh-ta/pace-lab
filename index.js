@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const codeRouter = require('./routes/codeRoutes');
 const userRouter = require('./routes/userRoutes');
 const frontRouter = require('./routes/frontEnd');
+const downloadsRouter = require('./routes/downloadsRoutes');
 
 //? setup express
 const app = express();
@@ -34,6 +35,7 @@ app.use(cookieParser());
 //? application logic/backend routes
 app.use(codeRouter);
 app.use(userRouter);
+app.use(downloadsRouter);
 app.use(frontRouter);
 
 app.listen(port, () => {

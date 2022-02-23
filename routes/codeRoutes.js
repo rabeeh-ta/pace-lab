@@ -1,22 +1,10 @@
 const express = require('express');
-const path = require('path');
 const { authenticateJWT } = require('../middleware/authJWT');
 const Code = require('../models/codeModel');
 const Trash = require('../models/trashModel');
 const User = require('../models/userModel');
 
 const router = new express.Router();
-
-router.get('/download/:programNo', (req, res) => {
-  var currentPath = path.join(
-    __dirname,
-    '..',
-    'downloads',
-    req.params.programNo
-  );
-
-  res.sendFile(`${currentPath}`);
-});
 
 //? create a new code file
 router.post('/code', async (req, res) => {
