@@ -1,6 +1,6 @@
-#include<math.h>
-#include<stdlib.h>
-#include<stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
 #define MAX 3
 
 void push(int[], int, int);
@@ -22,43 +22,43 @@ int main()
         case 1:
             if (top < MAX - 1)
             {
-                
+
                 printf("Enter the Element to be pushed :");
-                scanf("%d",&ele);
+                scanf("%d", &ele);
                 top++;
-                push(stack,ele,top);
+                push(stack, ele, top);
             }
             else
                 printf("stack is full\n");
             break;
-        
-        case 2:if(top>= 0)
-                {
-                    ele =pop(stack,top);
-                    top--;
-                    printf("The element popped is %d ",ele);
-                    break;
-                } 
-                else 
-                {
-                    printf("Stack is empty\n");
-                    break;
-                }
-        
+
+        case 2:
+            if (top >= 0)
+            {
+                ele = pop(stack, top);
+                top--;
+                printf("The element popped is %d ", ele);
+                break;
+            }
+            else
+            {
+                printf("Stack is empty\n");
+                break;
+            }
+
         case 3:
             palin(stack, top);
             break;
-        
+
         case 4:
             display(stack, top);
             break;
-        
+
         case 5:
             exit(0);
         }
     }
 }
-
 
 void push(int stack[MAX], int ele, int top)
 {
@@ -113,4 +113,3 @@ void display(int stack[MAX], int top)
     else
         printf("stack is empty\n");
 }
-

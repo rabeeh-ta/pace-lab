@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <ctype.h>
 int stack[50];
 int top = -1;
 void push(int);
@@ -22,7 +23,7 @@ int main()
     for (i = 0; suffix[i] != '\0'; i++)
     {
         ch = suffix[i];
-        //puts(ch);
+        // puts(ch);
         if (isdigit(ch))
             push(ch - '0');
         else
@@ -31,31 +32,38 @@ int main()
             p1 = pop();
             switch (ch)
             {
-            case '+':push(p1 + p2);
+            case '+':
+                push(p1 + p2);
                 break;
-            case '-':push(p1 - p2);
+            case '-':
+                push(p1 - p2);
                 break;
-            case '*':push(p1 * p2);
+            case '*':
+                push(p1 * p2);
                 break;
-            case '/':if (p2 == 0)
+            case '/':
+                if (p2 == 0)
                 {
                     printf("Divide by Zero error\n");
                     exit(0);
                 }
                 push(p1 / p2);
                 break;
-            case '%':if (p2 == 0)
+            case '%':
+                if (p2 == 0)
                 {
                     printf("Divide by Zero error\n");
                     exit(0);
                 }
                 push(p1 % p2);
                 break;
-            case '^':push(pow(p1, p2));
+            case '^':
+                push(pow(p1, p2));
                 break;
-            default:printf("Invalid Expression\n");
+            default:
+                printf("Invalid Expression\n");
             }
         }
     }
-    printf("The value of given suffix expression is : %d\n",pop());
+    printf("The value of given suffix expression is : %d\n", pop());
 }

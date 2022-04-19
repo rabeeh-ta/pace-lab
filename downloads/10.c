@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #define MAX 20
@@ -9,7 +8,7 @@ struct node
 };
 typedef struct node *NODE;
 NODE tree = NULL;
-void createBST(int a[MAX], int n)
+void CreateBST(int a[MAX], int n)
 {
     NODE temp, p, q;
     int i;
@@ -26,7 +25,6 @@ void createBST(int a[MAX], int n)
             while (q != NULL)
             {
                 p = q;
-
                 if (a[i] < p->data)
                     q = p->lchild;
                 else if (a[i] > p->data)
@@ -46,48 +44,47 @@ void createBST(int a[MAX], int n)
             }
         }
     }
-    printf("binary search tree created\n\n");
+    printf("Binary Seacrh Tree created\n\n");
 }
-
-void inorder(NODE tree)
+void Inorder(NODE tree)
 {
     if (tree != NULL)
     {
-        inorder(tree->lchild);
-        printf("%d", tree->data);
-        inorder(tree->rchild);
+        Inorder(tree->lchild);
+        printf("%d ", tree->data);
+        Inorder(tree->rchild);
     }
 }
-void preorder(NODE tree)
+void Preorder(NODE tree)
 {
     if (tree != NULL)
     {
-        printf("%d", tree->data);
-        preorder(tree->lchild);
-        preorder(tree->rchild);
+        printf("%d ", tree->data);
+        Preorder(tree->lchild);
+        Preorder(tree->rchild);
     }
 }
-void postorder(NODE tree)
+void Postorder(NODE tree)
 {
     if (tree != NULL)
     {
-        postorder(tree->lchild);
-        postorder(tree->rchild);
-        printf("%d", tree->data);
+        Postorder(tree->lchild);
+        Postorder(tree->rchild);
+        printf("%d ", tree->data);
     }
 }
-void SearchBST(NODE tree)
+void SearchBST()
 {
     NODE temp1;
     int key;
-    printf("enter the key to be searched:");
+    printf("Enter the key to be searched : ");
     scanf("%d", &key);
     temp1 = tree;
     while (temp1 != NULL)
     {
         if (key == temp1->data)
         {
-            printf("the key %d found in the BST", key);
+            printf("The key %d found in the BST", key);
             return;
         }
         else if (key < temp1->data)
@@ -95,42 +92,41 @@ void SearchBST(NODE tree)
         else
             temp1 = temp1->rchild;
     }
-    printf("key %d not found in the BST", key);
+    printf("Key %d not found in the BST", key);
 }
-
 int main()
 {
     int a[MAX], n, i, choice;
     while (1)
     {
-        printf("\n\n************MENU**********");
-        printf("\n1. create a BST of n integers\n2.traverse the BST in inorder\n3.traverse the BST in preorder\n4. traverse BST in postorder \n5.search the BST for a given element(key)\n6.exit\n");
-        printf("enter your choice:");
+        printf("\n\n*********MENU******");
+        printf("\n1. Create a BST of n integers\n2. Traverse the BST inInorder\n3. Traverse the BST in Preorder\n4. Traverse the BST inPostorder\n5. Search the BST for a given element (KEY)\n6. Exit\n");
+        printf("Enter your choice : ");
         scanf("%d", &choice);
         switch (choice)
         {
         case 1:
-            printf("enter the number of integers:");
+            printf("Enter the number of integers : ");
             scanf("%d", &n);
-            printf("enter the elements\n");
+            printf("Enter the elements\n");
             for (i = 0; i < n; i++)
                 scanf("%d", &a[i]);
-            createBST(a, n);
+            CreateBST(a, n);
             break;
         case 2:
-            printf("inorder traversal:\n");
-            inorder(tree);
+            printf("Inorder Traversal :\n");
+            Inorder(tree);
             break;
         case 3:
-            printf("preorder traversal:\n");
-            preorder(tree);
+            printf("Preorder Traversal :\n");
+            Preorder(tree);
             break;
         case 4:
-            printf("postorder traversal:\n");
-            postorder(tree);
+            printf("Postoder Traversal :\n");
+            Postorder(tree);
             break;
         case 5:
-            SearchBST(tree);
+            SearchBST();
             break;
         case 6:
             exit(0);
