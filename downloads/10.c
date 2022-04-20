@@ -99,7 +99,7 @@ int main()
     int a[MAX], n, i, choice;
     while (1)
     {
-        printf("\n\n*********MENU******");
+        printf("\n\n****MENU***");
         printf("\n1. Create a BST of n integers\n2. Traverse the BST inInorder\n3. Traverse the BST in Preorder\n4. Traverse the BST inPostorder\n5. Search the BST for a given element (KEY)\n6. Exit\n");
         printf("Enter your choice : ");
         scanf("%d", &choice);
