@@ -26,7 +26,7 @@ nav a:hover {
 }
 
 .link-live {
-  color: #f0c8d5;
+  color: #eea7be;
 }
 
 nav ul {
@@ -38,6 +38,25 @@ nav li > a {
 }
 nav li > a:hover {
   color: #f0c8d5;
+}
+
+.sem-section ul{
+  list-style-type: none;
+  display: flex;
+justify-content: center;
+}
+.sem-section li{
+  margin:10px;
+  font-weight:bold;
+  
+}
+.sem-section a{
+  text-decoration: none;
+  color: #959698;
+}
+.sem-section a:hover{
+
+  color: #ded746;
 }
 
 section {
