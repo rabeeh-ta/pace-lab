@@ -15,6 +15,16 @@ const codeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  sem: {
+    type: Number,
+    min: 1,
+    max: 8,
+    required: true,
+  },
+  tag: {
+    type: String,
+    trim: true,
+  },
   author: {
     type: String,
     default: 'anonymous',
