@@ -208,3 +208,24 @@ section {
 .adminPanelActiveBtn {
   color: #fff323 !important;
 }
+
+/* post page */
+
+.select-sem{
+  margin-right:50px;
+  padding:2px;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.form-control-sm{
+  width: 120px;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
