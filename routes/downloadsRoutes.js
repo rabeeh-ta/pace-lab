@@ -3,11 +3,12 @@ const path = require('path');
 
 const router = new express.Router();
 
-router.get('/download/:programNo', (req, res) => {
+router.get('/download/:sub/:programNo', (req, res) => {
   var currentPath = path.join(
     __dirname,
     '..',
     'downloads',
+    req.params.sub,
     req.params.programNo
   );
 
