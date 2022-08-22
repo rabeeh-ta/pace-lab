@@ -10,8 +10,12 @@
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Stick&display=swap" rel="stylesheet">
+
+    <!-- fontawesome for icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
     <!-- Vue -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
@@ -40,68 +44,84 @@
             </ul>
         </nav>
 
-        <!-- <div class="sem-section">
-            <ul>
-                <li><a href="#">Sem1</a></li>
-                <li><a href="#">Sem2</a></li>
-                <li><a href="#">Sem3</a></li>
-                <li><a href="#">Sem4</a></li>
-                <li><a href="#">Sem5</a></li>
-                <li><a href="#">Sem6</a></li>
-                <li><a href="#">Sem7</a></li>
-                <li><a href="#">Sem8</a></li>
-            </ul>
-        </div> -->
-
 
         <section id="homePage">
-
-            <div v-for="code in codes" :key="code._id" class="card" style="width: 20rem;">
-                <div class="card-body">
-                    <h5 class="card-title">{{code.title}}</h5>
-                    <h6 class="card-subtitle mb-1 mx-3 text-muted">@{{code.author}}</h6>
-                    <p class="card-text">{{code.description}}</p>
-                    <div class="cardFooter">
-                        <span class="text-muted text-italic small"><em>Posted:{{code.posted}}</em></span>
-                        <!-- Button trigger modal -->
-                        <button type="button" href="#" class="btn btn-green" data-bs-toggle="modal"
-                            :data-bs-target="`#mid${code._id}`">Code</button>
+            <div class="sem-section">
+                <ul>
+                    <li><a href="#" @click="sem=3">Sem3</a></li>
+                    <li><a href="#" @click="sem=4">Sem4</a></li>
+                    <li><a href="#" @click="sem=5">Sem5</a></li>
+                    <li><a href="#" @click="sem=6">Sem6</a></li>
+                    <li><a href="#" @click="sem=7">Sem7</a></li>
+                    <li><a href="#" @click="sem=8">Sem8</a></li>
 
 
-                        <!-- Modal -->
-                        <div class="modal" :id="`mid${code._id}`">
-                            <div class="modal-dialog modal-lg ">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <div class="modal-title">{{code.title}}</div>
+                </ul>
 
-                                        <div>
-                                            <button type="button" :id="code._id" class="btn btn-copy"
-                                                @click="copyToClipboard(code._id)"> Copy
-                                            </button>
+                <ul>
+                    <span class="fas fa-filter "></span>
+                    <li v-for="tag,index in filter" class="sem-filter-tags" :key="index" @click="filterCode(tag)">
+                        {{tag}}</li>
+                </ul>
+            </div>
 
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+
+            <div class="cards-section">
+
+                <div v-for="code in domRender" :key="code._id" class="card" style="width: 20rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{code.title}}</h5>
+                        <h6 class="card-subtitle mb-1 mx-3 text-muted">@{{code.author}}</h6>
+                        <p class="card-text">{{code.description}}</p>
+                        <div class="cardFooter">
+                            <div>
+                                <span class="text-muted text-italic small"><em>Sub:
+                                        {{(code.tag).toUpperCase()}}</em></span>
+                                <br>
+                                <span class="text-muted text-italic small"><em>Posted:{{code.posted}}</em></span>
+                            </div>
+
+
+                            <!-- Button trigger modal -->
+                            <button type="button" href="#" class="btn btn-green" data-bs-toggle="modal"
+                                :data-bs-target="`#mid${code._id}`">Code</button>
+
+
+                            <!-- Modal -->
+                            <div class="modal" :id="`mid${code._id}`">
+                                <div class="modal-dialog modal-lg ">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <div class="modal-title">{{code.title}}</div>
+
+                                            <div>
+                                                <button type="button" :id="code._id" class="btn btn-copy"
+                                                    @click="copyToClipboard(code._id)"> Copy
+                                                </button>
+
+                                                <button type="button" class="btn-close"
+                                                    data-bs-dismiss="modal"></button>
+                                            </div>
+
                                         </div>
-
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>{{code.description}}</p>
-                                        <pre><code class="language-c" v-html="code.code">
+                                        <div class="modal-body">
+                                            <p>{{code.description}}</p>
+                                            <pre><code class="language-c" v-html="code.code">
 
                                         </code></pre>
 
+                                        </div>
+                                        <div class="modal-footer"></div>
                                     </div>
-                                    <div class="modal-footer"></div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
-
     </div>
 
     <script>
@@ -117,6 +137,10 @@
                 el: '#homePage',
                 data: {
                     codes: [],
+                    domRender: [],
+                    sem: 1,
+                    filter: []
+
                 },
                 created() {
                     fetch('https://pace-lab.herokuapp.com/codes', {
@@ -137,6 +161,7 @@
                                 e.posted = e.posted.toDateString();
                             });
 
+                            this.sem = 4;
                         })
                         .catch((err) => console.log(err));
                 },
@@ -151,8 +176,26 @@
                         const copyBtn = document.getElementById(codeId);
                         copyBtn.innerHTML = "Copied";
 
+                    },
+                    filterCode: function (tag) {
+                        this.domRender = this.codes.filter(code => code.tag == tag);
+                    }
+                },
+                watch: {
+                    sem: function (sem) {
+                        tags = [];
+                        this.filter = [];
+                        this.domRender = []; // clear DOM
+                        this.codes.forEach(code => {
+                            if (sem == code.sem) {
+                                tags.push(code.tag)
+                                this.domRender.push(code);
+                            }
+                        })
+                        this.filter = [...new Set(tags)];
                     }
                 }
+
             });
         }
 

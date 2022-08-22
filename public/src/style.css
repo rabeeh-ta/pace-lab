@@ -19,6 +19,7 @@ nav a {
   color: #cd4773;
   font-size: bold;
 }
+
 nav a:hover {
   text-decoration: none;
   color: #cd4773;
@@ -32,34 +33,60 @@ nav a:hover {
 nav ul {
   padding-top: 20px;
 }
-nav li > a {
+
+nav li>a {
   color: white;
   font-size: 1.2rem;
 }
-nav li > a:hover {
+
+nav li>a:hover {
   color: #dea9ba;
 }
 
-.sem-section ul{
+.selected-sem {
+  color: #ded746 !important;
+
+}
+
+.sem-section {
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.sem-section ul {
   list-style-type: none;
   display: flex;
-justify-content: center;
+  justify-content: center;
+  align-items: center;
 }
-.sem-section li{
-  margin:10px;
-  font-weight:bold;
-  
+.sem-section span {
+  margin-left: 60px;
+  font-size: 20px;
+  color: white;
 }
-.sem-section a{
+
+
+.sem-section li {
+  margin: 10px;
+  font-weight: bold;
+}
+
+.sem-section a {
   text-decoration: none;
   color: #959698;
 }
-.sem-section a:hover{
 
+.sem-section a:hover {
   color: #ded746;
 }
 
-section {
+.sem-filter-tags{
+  cursor: pointer;
+  color: #7DCE13;
+}
+
+.cards-section {
   margin-top: 1%;
   display: flex;
   flex-direction: row;
@@ -79,15 +106,18 @@ section {
   text-decoration: none;
   color: black;
 }
+
 .card a:hover {
   text-decoration: none;
   color: black;
 }
+
 .cardFooter {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+
 .cardFooter button {
   color: #00917c;
   text-transform: uppercase;
@@ -97,6 +127,7 @@ section {
 .btn-red {
   color: #b91646 !important;
 }
+
 .btn-green {
   color: #00917c !important;
 }
@@ -116,13 +147,29 @@ section {
 }
 
 @media (max-width: 480px) {
+
   nav {
     display: flex;
     flex-direction: column;
   }
+
   nav ul {
     padding-top: 4px;
   }
+  .sem-section {
+    display: flex;
+    flex-direction: column;
+  }
+  .sem-section ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: start;
+    margin: 2px;    
+  }
+  .sem-section li {
+    margin: 5px;
+  }
+
 }
 
 /* about page*/
@@ -143,6 +190,7 @@ section {
   color: white;
   margin: 0 0 0 18px;
 }
+
 .fourOfour img {
   width: 120px;
   border-radius: 50%;
@@ -157,6 +205,7 @@ section {
   from {
     margin-left: 0%;
   }
+
   to {
     margin-left: 100%;
   }
@@ -166,6 +215,7 @@ section {
   from {
     margin-top: 0%;
   }
+
   to {
     margin-top: 100%;
   }
@@ -194,6 +244,7 @@ section {
   list-style: none;
   padding: 10px;
 }
+
 .admin-control-panel a {
   color: inherit;
   padding-left: 25px;
@@ -207,4 +258,25 @@ section {
 
 .adminPanelActiveBtn {
   color: #fff323 !important;
+}
+
+/* post page */
+
+.select-sem {
+  margin-right: 50px;
+  padding: 2px;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+.form-control-sm {
+  width: 120px;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
 }
