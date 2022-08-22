@@ -1,5 +1,3 @@
-package com.example.one;
-
 import java.util.Scanner;
 
 public class Student {
@@ -8,17 +6,16 @@ public class Student {
     String Branch;
     long Phone;
 
-    public Student(long usn, String name, String br, long ph){
+    public Student(long usn, String name, String br, long ph) {
         this.USN = usn;
         this.Name = name;
         this.Branch = br;
         this.Phone = ph;
     }
 
-    void display(){
-        System.out.println(USN + "\t" + Name + "\t" + Branch + "\t" + Phone );
+    void display() {
+        System.out.println(USN + "\t" + Name + "\t" + Branch + "\t" + Phone);
     }
-
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -28,8 +25,8 @@ public class Student {
 
         Student[] students = new Student[n];
 
-        for (int i = 0; i< n; i++){
-            System.out.println("Enter the details of student" + (i+1));
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter the details of student" + (i + 1));
 
             System.out.println("Enter the USN");
             long usn = scan.nextLong();
@@ -43,11 +40,11 @@ public class Student {
             System.out.println("Enter the phone number");
             long phone = scan.nextLong();
 
-            students[i] = new Student(usn, name , branch, phone);
+            students[i] = new Student(usn, name, branch, phone);
         }
 
-        System.out.println("USN" + "\t" + "Name" + "\t" + "Branch"  +"\t" +"Phone");
-        for(int i = 0; i<n; i++){
+        System.out.println("USN" + "\t" + "Name" + "\t" + "Branch" + "\t" + "Phone");
+        for (int i = 0; i < n; i++) {
             students[i].display();
         }
     }

@@ -1,5 +1,3 @@
-package Three;
-
 import java.util.Scanner;
 
 public class Divide {
@@ -10,10 +8,9 @@ public class Divide {
         int a = scan.nextInt();
         int b = scan.nextInt();
 
-        try{
-            System.out.println("The result of division a / b is " + (a/b));
-        }
-        catch ( ArithmeticException e){
+        try {
+            System.out.println("The result of division a / b is " + (a / b));
+        } catch (ArithmeticException e) {
             System.out.println("division by zero error");
         }
     }

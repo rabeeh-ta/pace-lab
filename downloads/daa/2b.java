@@ -1,14 +1,13 @@
-package com.example.twob;
-
 import java.util.Scanner;
 import java.util.StringTokenizer;
+
 public class Customer {
     private String customer;
     private String date;
 
-    public Customer(String customer, String date){
+    public Customer(String customer, String date) {
         this.customer = customer;
-        this.date  = date;
+        this.date = date;
     }
 
     public static void main(String[] args) {
@@ -22,6 +21,6 @@ public class Customer {
         System.out.println("Customer Name " + customerName);
         StringTokenizer date = new StringTokenizer(dateOFBirth, "/");
 
-        System.out.println("Customer DOB: " + date.nextToken() + "," + date.nextToken()+ "," +date.nextToken());
+        System.out.println("Customer DOB: " + date.nextToken() + "," + date.nextToken() + "," + date.nextToken());
     }
 }

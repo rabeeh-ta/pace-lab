@@ -1,5 +1,3 @@
-package com.example.oneb;
-
 import java.util.Scanner;
 
 public class Stack {
@@ -8,31 +6,31 @@ public class Stack {
     int[] arr = new int[max_size];
     int top = -1;
 
-    public void push(int ele){
-        if(top< max_size-1){
-            System.out.println("the element added is "+ele);
-            top ++;
+    public void push(int ele) {
+        if (top < max_size - 1) {
+            System.out.println("the element added is " + ele);
+            top++;
             arr[top] = ele;
-        }else{
+        } else {
             System.out.println("Error: StackOverflow");
         }
     }
 
-    public void pop(){
-        if(top>= 0){
-            System.out.println("the element poped is "+arr[top]);
-            top --;
-        }else{
+    public void pop() {
+        if (top >= 0) {
+            System.out.println("the element poped is " + arr[top]);
+            top--;
+        } else {
             System.out.println("Error: Stack underflow");
         }
     }
 
-    public void display_stack_contents(){
-        if(top>=0){
-            for(int i =0; i<=top; i++){
-                System.out.println(arr[i]+ " ");
+    public void display_stack_contents() {
+        if (top >= 0) {
+            for (int i = 0; i <= top; i++) {
+                System.out.println(arr[i] + " ");
             }
-        }else{
+        } else {
             System.out.println("stack is empty");
         }
     }
@@ -48,7 +46,7 @@ public class Stack {
             System.out.println("Enter your choice: \n 1.push \n 2.pop \n 3.dispaly \n 4.exit \n");
             int choice = scan.nextInt();
 
-            switch (choice){
+            switch (choice) {
                 case 1:
                     System.out.println("Enter the element to be inserted \n");
                     elem = scan.nextInt();
@@ -66,6 +64,6 @@ public class Stack {
                 default:
                     System.out.println("invalid input");
             }
-        }while(whileLoop);
+        } while (whileLoop);
     }
 }
