@@ -77,6 +77,7 @@ public class Merge {
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - statTime;
 
+        System.out.println("sorted array is");
         for (int i : numbers)
             System.out.print("\t" + i);
 

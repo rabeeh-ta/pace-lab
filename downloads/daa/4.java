@@ -6,18 +6,10 @@ public class Quick {
     private int size;
 
     public void sort(int[] values) {
-        if (values == null || values.length == 0)
-            return;
-
         this.numbers = values;
         size = values.length;
-
-        long startTime = System.currentTimeMillis();
         quicksort(0, size - 1);
 
-        long stopTime = System.currentTimeMillis();
-        long elapsedTime = stopTime - startTime;
-        System.out.println("Time taken: " + elapsedTime);
     }
 
     private void quicksort(int low, int high) {
@@ -67,23 +59,24 @@ public class Quick {
         size = scan.nextInt();
 
         numbers = new int[size];
-        System.out.println("The elements of the array");
+        System.out.println("\n The elements of the array");
         Random random = new Random();
 
         for (int i = 0; i < size; i++)
             numbers[i] = Math.abs(random.nextInt(100));
 
         for (int i = 0; i < size; i++)
-            System.out.println('\t' + numbers[i]);
+            System.out.print("\t" + numbers[i]);
+        System.out.println();
 
         long startTime = System.currentTimeMillis();
         sorter.sort(numbers);
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - startTime;
-        System.out.println();
+        System.out.println("\n The sorted array is");
         for (int i : numbers)
-            System.out.println(i + ' ');
+            System.out.print("\t" + i);
 
-        System.out.println("Time Taken " + elapsedTime);
+        System.out.print("\nTime Taken " + elapsedTime);
     }
 }
