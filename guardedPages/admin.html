@@ -100,7 +100,7 @@
                 },
                 created() {
                     //? GET all the code files from DB
-                    fetch('https://pace-lab.herokuapp.com/codes', {
+                    fetch('https://pace-lab.onrender.com/codes', {
                         method: 'GET',
                         headers: { 'Content-type': 'application/json;charset=UTF-8' },
                     })
@@ -122,7 +122,7 @@
                         .catch((err) => console.log(err));
 
                     //? GET recently deleted files from DB
-                    fetch("https://pace-lab.herokuapp.com/trashBin", {
+                    fetch("https://pace-lab.onrender.com/trashBin", {
                         method: 'GET',
                         headers: { 'Content-type': 'application/json;charset=UTF-8' },
                     })
@@ -150,7 +150,7 @@
                 methods: {
                     deleteCode(codeId) {
                         // console.log(codeId);
-                        fetch(`https://pace-lab.herokuapp.com/codes/${codeId}`, {
+                        fetch(`https://pace-lab.onrender.com/codes/${codeId}`, {
                             method: 'DELETE'
                         })
                             .then(res => res.json())
@@ -170,7 +170,7 @@
                         });
 
                         //POST to code
-                        fetch("https://pace-lab.herokuapp.com/code", {
+                        fetch("https://pace-lab.onrender.com/code", {
                             method: "POST", // Adding method type 
                             body: JSON.stringify({  // Adding body or contents to send 
                                 "author": codeToRecover.author,
@@ -184,7 +184,7 @@
                         })
                             // after code uploaded to mainDB delete code from trashDB
                             .then(response => {
-                                fetch(`https://pace-lab.herokuapp.com/trashBin/${codeId}`, {
+                                fetch(`https://pace-lab.onrender.com/trashBin/${codeId}`, {
                                     method: 'DELETE'
                                 })
                                     .then(res => res.json())
