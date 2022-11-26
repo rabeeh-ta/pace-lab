@@ -132,7 +132,7 @@
 
                         if (this.formValidation()) {
                             //POST request using fetch() 
-                            fetch("https://pace-lab.herokuapp.com/code", {
+                            fetch("https://pace-lab.onrender.com/code", {
                                 method: "POST", // Adding method type 
                                 body: JSON.stringify({  // Adding body or contents to send 
                                     "author": this.author,
@@ -145,7 +145,7 @@
                                 headers: {  // Adding headers to the request 
                                     "Content-type": "application/json; charset=UTF-8"
                                 }
-                            }).then(response => window.location = "https://pace-lab.herokuapp.com/"); // redirect after success
+                            }).then(response => window.location = "https://pace-lab.onrender.com/"); // redirect after success
 
                         }
 

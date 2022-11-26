@@ -91,7 +91,7 @@
                         this.feedback = ""; // clear feedback
 
                         //! make POST request => "/login" route
-                        fetch("https://pace-lab.herokuapp.com/login", {
+                        fetch("https://pace-lab.onrender.com/login", {
                             method: "POST",
                             headers: {  //! Adding headers to the request 
                                 "Content-type": "application/json; charset=UTF-8"
@@ -106,7 +106,7 @@
 
                                     if (response.status == 200) {//! SUCCESS ==> save JWT to cookie and redirect to "/admin"
                                         document.cookie = `authorization=${data.accessToken};Secure`
-                                        window.location = "https://pace-lab.herokuapp.com/admin";
+                                        window.location = "https://pace-lab.onrender.com/admin";
                                         // window.location = "localhost:3000/admin";
                                     } else { //! ERROR show feedback => wrongpassword,no user found/register, etc.
                                         this.feedback = data.error;
