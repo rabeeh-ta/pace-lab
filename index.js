@@ -1,6 +1,5 @@
 require('dotenv').config();
 require('./db/mongoose');
-const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
@@ -8,7 +7,6 @@ const cookieParser = require('cookie-parser');
 //? different routes files.
 const codeRouter = require('./routes/codeRoutes');
 const userRouter = require('./routes/userRoutes');
-const frontRouter = require('./routes/frontEnd');
 const downloadsRouter = require('./routes/downloadsRoutes');
 
 //? setup express
@@ -28,7 +26,6 @@ app.use((req, res, next) => {
 //? express configurations
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
 app.use(express.static('downloads'));
 app.use(cookieParser());
 
@@ -36,7 +33,6 @@ app.use(cookieParser());
 app.use(codeRouter);
 app.use(userRouter);
 app.use(downloadsRouter);
-app.use(frontRouter);
 
 app.listen(port, () => {
   console.log('Express running on port ' + port);
