@@ -150,12 +150,12 @@
                 methods: {
                     deleteCode(codeId) {
                         // console.log(codeId);
-                        fetch(`https://pace-lab.onrender.com/codes/${codeId}`, {
+                        fetch(`https://pacelab.tech/codes/${codeId}`, {
                             method: 'DELETE'
                         })
                             .then(res => res.json())
                             .then(data => {
-                                window.location = "https://pace-lab.herokuapp.com";
+                                window.location = "https://pacelab.tech";
                             })
                             .catch(err => console.log(err));
                     },
@@ -184,12 +184,12 @@
                         })
                             // after code uploaded to mainDB delete code from trashDB
                             .then(response => {
-                                fetch(`https://pace-lab.onrender.com/trashBin/${codeId}`, {
+                                fetch(`https://pacelab.tech/trashBin/${codeId}`, {
                                     method: 'DELETE'
                                 })
                                     .then(res => res.json())
                                     .then(data => {
-                                        window.location = "https://pace-lab.herokuapp.com";
+                                        window.location = "https://pacelab.tech";
                                     })
                             }) // redirect after success
                             .catch(err => console.log(err));
