@@ -6,6 +6,23 @@ const User = require('../models/userModel');
 
 const router = new express.Router();
 
+//? get info about the server
+app.get('/api', (req, res) => {
+  return res.send(
+    `
+    Server Status: OK 
+    <br>\n
+    ----- routes ------- <br>\n
+    GET   #/codes   #/code:id   #/trashBin  <br>\n
+    POST  #/code   <br>\n
+    PUT   #/codes:id   <br>\n
+    DELETE  #/codes:id(auth)   #/trashBin:id   <br>\n
+    <br>\n
+    GET  #/download/ls   #/download/:sub/:programNo
+  `
+  );
+});
+
 //? create a new code file
 router.post('/code', async (req, res) => {
   const code = new Code(req.body);
