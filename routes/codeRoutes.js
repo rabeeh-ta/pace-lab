@@ -7,7 +7,7 @@ const User = require('../models/userModel');
 const router = new express.Router();
 
 //? get info about the server
-app.get('/api', (req, res) => {
+router.get('/api', (req, res) => {
   return res.send(
     `
     Server Status: OK 
